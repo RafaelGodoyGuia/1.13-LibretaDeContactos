@@ -18,7 +18,7 @@ public class Interfaz {
         Scanner sc = new Scanner(System.in);
         System.out.println("Opciones de la agenda molonga");
         System.out.println("-----------------------------");
-        System.out.println("1.Establecer o modifivar nombre");
+        System.out.println("1.Establecer o modificar nombre");
         System.out.println("2. Añadir Contacto");
         System.out.println("3. Modificar Contacto");
         System.out.println("4. Borrar Contacto");
@@ -27,7 +27,7 @@ public class Interfaz {
         selector = sc.nextInt();
         switch (selector) {
             case 1: {
-                System.out.println("Establece o modificar nombre de la agenda molonga");
+                System.out.println("Establecer o modificar nombre de la agenda molonga");
                 System.out.println("-------------------------------------------------");
                 Gestor.establecerNombre(agenda);
                 return (true);

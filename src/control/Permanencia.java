@@ -4,7 +4,7 @@ import dominio.Agenda;
 
 import java.io.*;
 
-public class Permanencia {
+public class Permanencia{
     public static void gestionExistenciaArchivo (File archivo) {
         if (!archivo.exists()) {
             try {

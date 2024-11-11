@@ -1,6 +1,8 @@
 package dominio;
 
-public class Contacto {
+import java.io.Serializable;
+
+public class Contacto implements Serializable {
     private String nombre;
     private String apellidos;
     private String telefono;
@@ -22,7 +24,7 @@ public class Contacto {
     }
 
     public Contacto setEmail (String email) {
-        this.telefono = telefono;
+        this.email = email;
         return (this);
     }
 
