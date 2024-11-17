@@ -1,19 +1,21 @@
 package presentacion;
 
+import control.ErrorContactoDuplicado;
+import control.ErrorContactoNoEncontrado;
 import control.Gestor;
 import dominio.Agenda;
 
 import java.util.Scanner;
 
 public class Interfaz {
-    public static void interfaz (Agenda agenda) {
+    public static void interfaz (Agenda agenda) throws ErrorContactoNoEncontrado {
         boolean continuar;
         do {
             continuar = menuPrincipal(agenda);
         }while(continuar);
     }
 
-    public static boolean menuPrincipal (Agenda agenda) {
+    public static boolean menuPrincipal (Agenda agenda) throws ErrorContactoNoEncontrado, ErrorContactoDuplicado {
         int selector;
         Scanner sc = new Scanner(System.in);
         System.out.println("Opciones de la agenda molonga");

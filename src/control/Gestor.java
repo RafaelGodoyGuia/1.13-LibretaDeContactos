@@ -15,7 +15,7 @@ public class Gestor {
         System.out.println("Nombre guardado");
 
     }
-    public static void annadirContacto (Agenda agenda) {
+    public static void annadirContacto (Agenda agenda) throws ErrorContactoDuplicado {
         Contacto contacto = new Contacto();
         Scanner sc = new Scanner(System.in);
         ArrayList<Contacto> contactos =new ArrayList<>();
@@ -27,13 +27,17 @@ public class Gestor {
         contacto.setTelefono(sc.nextLine());
         System.out.print("Introduce el email del contacto: ");
         contacto.setEmail(sc.nextLine());
+        for (Contacto contacto1 : contactos) {
+            if (contacto1.getNombre().equals(contacto.getNombre()) && contacto1.getApellidos().equals(contacto.getApellidos()))
+                throw new ErrorContactoDuplicado(contacto);
+        }
         contactos.add(contacto);
         agenda.setContactos(contactos);
         System.out.println("Contacto añadido con éxito.");
 
     }
 
-    public static void modificarContacto (Agenda agenda) {
+    public static void modificarContacto (Agenda agenda) throws ErrorContactoNoEncontrado{
         ArrayList<Contacto> contactos = agenda.getContactos();
         Contacto contacto = new Contacto();
         Scanner sc = new Scanner(System.in);
@@ -44,8 +48,9 @@ public class Gestor {
         System.out.print("Introduce los apellidos del contacto que quieres modificar: ");
         contacto.setApellidos(sc.nextLine());
         contactoModificar = buscarContacto(contactos, contacto);
-        if (contactoModificar == null)
-            return;
+        if (contactoModificar == null) {
+            throw new ErrorContactoNoEncontrado(contacto);
+        }
         System.out.print("Introduce el nuevo nombre: ");
         contactoModificar.setNombre(sc.nextLine());
         System.out.print("Introduce los nuevos apellidos: ");
@@ -57,7 +62,7 @@ public class Gestor {
         System.out.println("Contacto modificado con éxito");
     }
 
-    public static void borrarContacto (Agenda agenda) {
+    public static void borrarContacto (Agenda agenda) throws ErrorContactoNoEncontrado {
         ArrayList<Contacto> contactos = agenda.getContactos();
         Scanner sc = new Scanner(System.in);
         Contacto contacto = new Contacto();
@@ -81,13 +86,12 @@ public class Gestor {
         }
     }
 
-    public static Contacto buscarContacto (ArrayList<Contacto> contactos, Contacto contacto) {
+    public static Contacto buscarContacto (ArrayList<Contacto> contactos, Contacto contacto) throws ErrorContactoNoEncontrado {
         for (Contacto contactoBusqueda: contactos) {
             if (contactoBusqueda.getNombre().equals(contacto.getNombre()) && contactoBusqueda.getApellidos().equals(contacto.getApellidos())) {
                 return (contactoBusqueda);
             }
         }
-        System.out.println("Contacto no encontrado");
-        return (null);
+        throw new ErrorContactoNoEncontrado(contacto);
     }
  }
